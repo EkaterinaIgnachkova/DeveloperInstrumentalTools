@@ -8,19 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Database.EFCore.Implementations
 {
-    public class WeatherDataAccess : IWeatherDataAccess
+    public class BlogDataAccess : IBlogDataAccess
     {
         private ExampleContext ExampleContext { get; }
         
-        public WeatherDataAccess(ExampleContext exampleContext)
+        public BlogDataAccess(ExampleContext exampleContext)
         {
             ExampleContext = exampleContext;
         }
 
-        public async Task<IEnumerable<WeatherEntity>> GetAllAsync(CancellationToken ct = default)
+        public async Task<IEnumerable<BlogEntity>> GetAllAsync(CancellationToken ct = default)
         {
-            return await this.ExampleContext.Weathers
-                .Include(x => x.Summary)
+            return await this.ExampleContext.Blogs
+                .Include(x => x.Category)
                 .OrderBy(x => x.TimeStamp)
                 .ToListAsync(ct);
         }

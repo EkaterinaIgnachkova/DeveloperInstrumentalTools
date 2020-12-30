@@ -19,124 +19,124 @@ namespace Database.EFCore.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Database.EFCore.Entities.SummaryEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.CategoryEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Summary");
+                    b.ToTable("Category");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Code = "Freezing"
+                            Title = "Freezing"
                         },
                         new
                         {
                             Id = 2,
-                            Code = "Bracing"
+                            Title = "Bracing"
                         },
                         new
                         {
                             Id = 3,
-                            Code = "Chilly"
+                            Title = "Chilly"
                         },
                         new
                         {
                             Id = 4,
-                            Code = "Cool"
+                            Title = "Cool"
                         },
                         new
                         {
                             Id = 5,
-                            Code = "Mild"
+                            Title = "Mild"
                         },
                         new
                         {
                             Id = 6,
-                            Code = "Warm"
+                            Title = "Warm"
                         },
                         new
                         {
                             Id = 7,
-                            Code = "Balmy"
+                            Title = "Balmy"
                         },
                         new
                         {
                             Id = 8,
-                            Code = "Hot"
+                            Title = "Hot"
                         },
                         new
                         {
                             Id = 9,
-                            Code = "Sweltering"
+                            Title = "Sweltering"
                         },
                         new
                         {
                             Id = 10,
-                            Code = "Scorching"
+                            Title = "Scorching"
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BlogEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("SummaryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("Temperature")
-                        .HasColumnType("numeric");
+                    b.Property<decimal>("Title")
+                        .HasColumnType("string");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SummaryId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("Weather");
+                    b.ToTable("Blog");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            SummaryId = 3,
-                            Temperature = -1.3m,
+                            CategoryId = 3,
+                            Title = "Russian news",
                             TimeStamp = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            SummaryId = 5,
-                            Temperature = 5.1m,
+                            CategoryId = 5,
+                            Title = "Europe news",
                             TimeStamp = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            SummaryId = 1,
-                            Temperature = -10m,
+                            CategoryId = 1,
+                            Title = "Japan news",
                             TimeStamp = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BlogEntity", b =>
                 {
-                    b.HasOne("Database.EFCore.Entities.SummaryEntity", "Summary")
+                    b.HasOne("Database.EFCore.Entities.CategoryEntity", "Category")
                         .WithMany()
-                        .HasForeignKey("SummaryId");
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }

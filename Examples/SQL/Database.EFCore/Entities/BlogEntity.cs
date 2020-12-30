@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.EFCore.Entities
 {
-    [Table("Weather")]
-    public class WeatherEntity
+    [Table("blog")]
+    public class BlogEntity
     {
         public int Id { get; set; }
         
-        public SummaryEntity Summary { get; set; }
+        public CategoryEntity Category { get; set; }
         
         public DateTime TimeStamp { get; set; }
         
-        public decimal Temperature { get; set; }
+        public string Title { get; set; }
     }
 }

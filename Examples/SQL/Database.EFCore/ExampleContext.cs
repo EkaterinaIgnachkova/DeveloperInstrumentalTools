@@ -7,8 +7,8 @@ namespace Database.EFCore
 {
     public partial class ExampleContext : DbContext
     {
-        public DbSet<SummaryEntity> Summaries { get; set; }
-        public DbSet<WeatherEntity> Weathers { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<BlogEntity> Blogs { get; set; }
         
         public ExampleContext()
         {
@@ -31,57 +31,57 @@ namespace Database.EFCore
         {
             OnModelCreatingPartial(modelBuilder);
 
-            modelBuilder.Entity<WeatherEntity>(entity =>
+            modelBuilder.Entity<BlogEntity>(entity =>
             {
-                entity.ToTable("Weather");
+                entity.ToTable("Blog");
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).UseIdentityColumn();
-                entity.HasOne(d => d.Summary);
+                entity.HasOne(d => d.Category);
             });
 
-            modelBuilder.Entity<SummaryEntity>(entity =>
+            modelBuilder.Entity<CategoryEntity>(entity =>
             {
-                entity.ToTable("Summary");
+                entity.ToTable("Category");
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).UseIdentityColumn();
             });
             
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 1, Code = "Freezing" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 2, Code = "Bracing" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 3, Code = "Chilly" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 4, Code = "Cool" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 5, Code = "Mild" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 6, Code = "Warm" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 7, Code = "Balmy" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 8, Code = "Hot" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 9, Code = "Sweltering" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 10, Code = "Scorching" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 1, Title = "Freezing" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 2, Title = "Bracing" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 3, Title = "Chilly" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 4, Title = "Cool" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 5, Title = "Mild" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 6, Title = "Warm" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 7, Title = "Balmy" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 8, Title = "Hot" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 9, Title = "Sweltering" });
+            modelBuilder.Entity<CategoryEntity>().HasData(new CategoryEntity { Id = 10, Title = "Scorching" });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BlogEntity>().HasData(new
             {
                 Id = 1, 
                 TimeStamp = new DateTime(2020, 1, 1),
-                Temperature = -1.3m,
-                SummaryId = 3
+                Title = "Russian news",
+                CategoryId = 3
             });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BlogEntity>().HasData(new
             {
                 Id = 2, 
                 TimeStamp = new DateTime(2020, 1, 2),
-                Temperature = 5.1m,
-                SummaryId = 5
+                Title = "Europe news",
+                CategoryId = 5
             });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BlogEntity>().HasData(new
             {
                 Id = 3, 
                 TimeStamp = new DateTime(2020, 1, 3),
-                Temperature = -10m,
-                SummaryId = 1
+                Title = "Japan news",
+                CategoryId = 1
             });
             
-            //modelBuilder.Entity<WeatherEntity>().OwnsOne(p => p.Summary).HasData(new { Date = new DateTime(2020, 1, 1), Temperature = -1, Code = "Chill" });
+            //modelBuilder.Entity<BlogEntity>().OwnsOne(p => p.Category).HasData(new { Date = new DateTime(2020, 1, 1), Temperature = -1, Title = "Chill" });
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

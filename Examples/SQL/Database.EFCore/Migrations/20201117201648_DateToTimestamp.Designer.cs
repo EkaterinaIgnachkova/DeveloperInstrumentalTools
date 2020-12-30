@@ -21,7 +21,7 @@ namespace Database.EFCore.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Database.EFCore.Entities.SummaryEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.CategoryEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,7 +33,7 @@ namespace Database.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Summary");
+                    b.ToTable("Category");
 
                     b.HasData(
                         new
@@ -88,14 +88,14 @@ namespace Database.EFCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BlogEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("SummaryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Temperature")
@@ -106,39 +106,39 @@ namespace Database.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SummaryId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("Weather");
+                    b.ToTable("Blog");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            SummaryId = 3,
+                            CategoryId = 3,
                             Temperature = -1.3m,
                             TimeStamp = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            SummaryId = 5,
+                            CategoryId = 5,
                             Temperature = 5.1m,
                             TimeStamp = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            SummaryId = 1,
+                            CategoryId = 1,
                             Temperature = -10m,
                             TimeStamp = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BlogEntity", b =>
                 {
-                    b.HasOne("Database.EFCore.Entities.SummaryEntity", "Summary")
+                    b.HasOne("Database.EFCore.Entities.CategoryEntity", "Category")
                         .WithMany()
-                        .HasForeignKey("SummaryId");
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }
